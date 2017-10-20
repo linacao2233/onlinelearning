@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{subject.name}}</h1>
+
+<div class="container">
+	<div class="row">
+
+		<nav id="sidebar" class="col-lg-2 col-md-4 bg-faded">
+		<ul>
+		{% for video in videos %}
+			<li>{{video.name}}</li>
+		{% endfor %}
+		</ul>
+			
+		</nav>
+
+		<div id="video" class="col-lg-10 col-md-8 bg-info">
+			<div class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{videos.0.youtubevid}}?rel=0" allowfullscreen></iframe>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+
+{% endblock %}
