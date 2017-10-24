@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
+<style type="text/css">
+{% block style %}
+
+
+{% endblock %}
+</style>
+
 
 {% block content %}
+{% include 'navbar.html' %}
 
 <h1>{{subject.name}}</h1>
 
-<div class="container">
+<div class="container-fluid">
+
 	<div class="row">
 
-		<nav id="sidebar" class="col-lg-2 col-md-4 bg-faded">
+		<div class="col-lg-2 col-md-3 bg-faded px-0">
+			{% include 'main/snippets/sidebar.html' with subject=subject %}
+		</div>
+
+<!-- 		<nav id="sidebar" class="col-lg-2 col-md-4 bg-faded">
 		<ul>
 		{% for video in videos %}
 			<li>{{video.name}}</li>
 		{% endfor %}
 		</ul>
 			
-		</nav>
+		</nav> -->
 
-		<div id="video" class="col-lg-10 col-md-8 bg-info">
+		<div id="video" class="col-lg-10 col-md-9 px-0">
 			<div class="embed-responsive embed-responsive-16by9">
-			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{videos.0.youtubevid}}?rel=0" allowfullscreen></iframe>
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{video.youtubevid}}?rel=0" allowfullscreen></iframe>
+			</div>
+			<div>
+				<h2>{{video.name}}</h2>
+				<p>{{video.description}}</p>
 			</div>
 		</div>
 		

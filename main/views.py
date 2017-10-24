@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Subjects, Videos
+from .models import Subjects, Videos, Chapters
 
 # Create your views here.
 
@@ -16,18 +16,31 @@ def index(request):
 	return render(request, template, context)
 
 
-def VideoPerSubject(request,slug):
+def VideoPerSubject(request,subjectslug,chapterslug,videoslug):
 	template = 'main/videolist.html'
 
-	subject = Subjects.objects.get(slug=slug)
-
-	videolist = Videos.objects.filter(subject=subject)
+	subject = Subjects.objects.get(slug=subjectslug)
+	chapter = subject.chapters.get(slug=chapterslug)
+	video = chapter.videos_set.get(slug=videoslug)
 
 	context = {
 	'subject': subject,
-	'videos': videolist,
+	'video': video,
 	}
 
 	return render(request, template, context)
 
+def Videolist(request,subjectslug):
+	template = 'main/videolist.html'
+
+	subject = Subjects.objects.get(slug=subjectslug)
+	chapter = subject.chapters.all()[:1].get()
+	video = chapter.videos_set.all()[:1]
+
+	context = {
+	'subject': subject,
+	'video': video,
+	}
+
+	return render(request, template, context)
 
